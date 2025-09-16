@@ -1,0 +1,308 @@
+﻿
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.navbar {
+    background-color: #343a40; /* Koyu arka plan */
+    border-bottom: 2px solid #ff5722; /* Alt çizgi turuncu */
+    position: sticky;
+    top: 0;
+    z-index: 9999; /* Navbar üstte kalacak */
+    animation: slideInNav 0.5s ease-in-out; /* Animasyon */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Hafif gölge */
+}
+
+@keyframes slideInNav {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.hero {
+    background: url('/Resim/img.jpg') no-repeat center center;
+    background-size: cover;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7); /* Daha belirgin gölge */
+    opacity: 0.9; /* Şeffaflık efekti */
+    animation: fadeIn 2s ease-in-out; /* Animasyon eklendi */
+    filter: brightness(1.3) contrast(1.2) saturate(1.4); /* Parlaklık, kontrast ve doygunluk arttırıldı */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Opaklık efekti için karartma */
+    z-index: 1;
+}
+
+.hero div {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8); /* Daha keskin gölge efekti */
+    animation: slideIn 1.5s ease-out; /* Başlık animasyonu */
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.hero p {
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    animation: fadeIn 2s ease-in-out 0.5s; /* Yazı animasyonu */
+}
+
+.btn-primary {
+    background-color: #ff5722; /* Canlı bir turuncu tonu */
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    transition: 0.3s;
+    box-shadow: 0px 4px 8px rgba(255, 87, 34, 0.7); /* Butona hafif gölge */
+    border-radius: 30px; /* Butona yuvarlak köşe */
+}
+
+    .btn-primary:hover {
+        background-color: #e64a19;
+        box-shadow: 0px 6px 12px rgba(255, 87, 34, 0.9);
+    }
+
+.btn-custom {
+    background: #ff5733;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+    .btn-custom:hover {
+        background: #c70039;
+    }
+
+.section {
+    padding: 80px 0;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+.navbar {
+    animation: slideInNav 0.5s ease-in-out; /* Navbar animasyonu */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Navbar'ın diğer içeriklerin üstünde görünmesini sağlar */
+}
+
+@keyframes slideInNav {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero içeriğini tam ortalamak için flexbox */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero h1,
+.hero p {
+    position: relative;
+    z-index: 3;
+}
+
+
+/* Navbar stil ayarları */
+.navbar {
+    background-color: #343a40; /* Koyu arka plan */
+    border-bottom: 2px solid #ff5722; /* Canlı turuncu renkli alt çizgi */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Navbar'ın diğer içeriklerin üstünde görünmesini sağlar */
+    animation: slideInNav 0.5s ease-in-out; /* Navbar animasyonu */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Hafif gölge */
+}
+
+@keyframes slideInNav {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Navbar genel stil */
+.navbar {
+    background-color: #343a40; /* Koyu arka plan */
+    border-bottom: 2px solid #ff5722; /* Alt çizgi turuncu */
+    position: sticky;
+    top: 0;
+    z-index: 9999; /* Navbar üstte kalacak */
+    animation: slideInNav 0.5s ease-in-out; /* Animasyon */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Hafif gölge */
+}
+
+/* Navbar animasyonu */
+@keyframes slideInNav {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Navbar marka (Logo) */
+.navbar .navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff5722; /* Canlı turuncu */
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+    .navbar .navbar-brand:hover {
+        color: #e64a19; /* Hoverda koyu turuncu */
+    }
+
+/* Navbar linkleri */
+.navbar-nav .nav-item {
+    margin-left: 20px;
+   
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
+}
+
+    .navbar-nav .nav-link:hover {
+        color: #ff5722; /* Hoverda turuncu */
+        transform: scale(1.05); /* Hoverda büyüme efekti */
+    }
+
+    /* Aktif bağlantılar */
+    .navbar-nav .nav-link.active {
+        color: #ff5722; /* Aktif bağlantı rengi */
+    }
+
+/* Kullanıcı bilgisi ve çıkış butonu */
+.navbar .navbar-text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ff5722;
+}
+
+.navbar .nav-item form button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.3s;
+}
+
+    .navbar .nav-item form button:hover {
+        color: #ff5722; /* Hoverda renk değişimi */
+    }
+
+/* Login/Logout butonları */
+.navbar .nav-item .btn-link {
+    color: #fff;
+    font-size: 1rem;
+    padding: 0;
+    text-decoration: underline;
+}
+
+    .navbar .nav-item .btn-link:hover {
+        color: #ff5722; /* Hoverda renk değişimi */
+    }
+
+/* Navbar'ı tam genişlikte yapma */
+.navbar .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Navbar'ın mobil görünümü */
+@media (max-width: 991px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+        .navbar-nav .nav-item {
+            margin-left: 0;
+            margin-top: 10px;
+        }
+}

@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewData["Title"] = "Personel Bilgi";
+}
+
+@section PersonelBilgiYoneticiStyle {
+    <link rel="stylesheet" href="~/css/Personel1.css">
+}
+
+
+
+<header>
+    <div class="nav-left">
+        <a asp-action="Anasayfa" asp-controller="Home">Anasayfa</a>
+    </div>
+    <div class="nav-right">
+        <span class="username">Merhaba, <strong>@ViewData["UserFullName"]</strong></span>
+        <form asp-action="Logout" asp-controller="Yonetici" method="post" style="display:inline;">
+            <button type="submit" class="btn logout-btn">Çıkış</button>
+        </form>
+
+
+
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li  class="active"><a asp-controller="Yonetici" asp-action="PersonelBilgi">Giriş-Çıkış Bilgileri</a></li>
+        <li ><a asp-controller="Yonetici" asp-action="Yonetici">Personel Yönetimi</a></li>
+        <li><a asp-controller="Yonetici" asp-action="Camera">Kamera</a></li>
+    </ul>
+</nav>
+
+<main>
+    <div class="container">
+        <h3>Personel Giriş-Çıkış Kayıtları</h3>
+
+        <!-- Filtreleme Alanı -->
+        <div class="filters">
+            <input type="text" placeholder="Id" id="filterId">
+            <input type="text" placeholder="Ad" id="filterFirstName">
+            <input type="text" placeholder="Soyad" id="filterLastName">
+            <input type="text" placeholder="Tarih (Gün/Ay/Yıl)" id="filterDate">
+            <input type="text" placeholder="Giriş Saati" id="filterEntry">
+            <input type="text" placeholder="Çıkış Saati" id="filterExit">
+            <button class="filter-btn" onclick="applyFilter()">Ara</button>
+        </div>
+
+        <!-- Kayıtların Listelendiği Tablo -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>Tarih</th>
+                    <th>Giriş Saati</th>
+                    <th>Çıkış Saati</th>
+                </tr>
+            </thead>
+            <tbody id="entryExitTable">
+                <tr>
+                    <td data-label="Id">1</td>
+                    <td data-label="Ad">John</td>
+                    <td data-label="Soyad">Doe</td>
+                    <td data-label="Tarih">01/01/2025</td>
+                    <td data-label="Saat">08:00</td>
+                    <td data-label="Saat">17:00</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jane</td>
+                    <td>Smith</td>
+                    <td>01/01/2025</td>
+                    <td>09:00</td>
+                    <td>18:00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Raporlama Bölümü -->
+        <div class="report-section">
+            <h3>Personel Raporları</h3>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad</th>
+                        <th>Soyad</th>
+                        <th>Raporlar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>
+                            <button class="report-btn pdf-btn" onclick="downloadReport('1', 'John', 'Doe', 'pdf')">PDF</button>
+                            <button class="report-btn excel-btn" onclick="downloadReport('1', 'John', 'Doe', 'excel')">Excel</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jane</td>
+                        <td>Smith</td>
+                        <td>
+                            <button class="report-btn pdf-btn" onclick="downloadReport('2', 'Jane', 'Smith', 'pdf')">PDF</button>
+                            <button class="report-btn excel-btn" onclick="downloadReport('2', 'Jane', 'Smith', 'excel')">Excel</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<script>
+    let base64Font = ""; // Base64 font bilgisini tutacak değişken
+
+    // Sayfa yüklendiğinde base64.txt dosyasını oku
+    fetch('/font/base64.txt')
+        .then(response => response.text())
+        .then(data => {
+            base64Font = data; // Dosyanın içeriğini değişkene aktar
+        })
+        .catch(error => console.error("Base64 dosyası yüklenemedi:", error));
+
+    function downloadReport(id, firstName, lastName, format) {
+        const entryExitData = [
+            { id: id, name: firstName, surname: lastName, date: "01/01/2025", entry: "08:00", exit: "17:00" },
+            { id: id, name: firstName, surname: lastName, date: "02/01/2025", entry: "09:00", exit: "18:00" }
+        ];
+
+        if (format === "pdf") {
+            if (!base64Font) {
+                alert("Base64 font dosyası yükleniyor, lütfen tekrar deneyin.");
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Fontu ekle
+            doc.addFileToVFS('DejaVuSans.ttf', base64Font);
+            doc.addFont('DejaVuSans.ttf', 'DejaVu', 'normal');
+            doc.setFont('DejaVu');
+
+            // Başlık
+            doc.setFontSize(18);
+            doc.text(`${firstName} ${lastName} Giriş-Çıkış Raporu`, 10, 10);
+
+            // Başlık stilini belirleyelim
+            doc.setFontSize(12);
+            doc.setTextColor(100);
+
+            // Tablonun başlıkları
+            doc.text('Tarih', 10, 20);
+            doc.text('Giriş', 60, 20);
+            doc.text('Çıkış', 120, 20);
+
+            // Çizgi
+            doc.setLineWidth(0.5);
+            doc.line(10, 22, 200, 22);
+
+            let y = 30; // Verilerin başlayacağı yer
+
+            // Her bir kayıt için verileri ekleyelim
+            entryExitData.forEach(record => {
+                doc.text(record.date, 10, y);
+                doc.text(record.entry, 60, y);
+                doc.text(record.exit, 120, y);
+                y += 8; // Her kayıttan sonra biraz boşluk bırak
+            });
+
+            // PDF'yi indir
+            doc.save(`${firstName}_${lastName}_report.pdf`);
+        }
+        else if (format === "excel") {
+            const ws = XLSX.utils.json_to_sheet(entryExitData);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Report");
+
+            XLSX.writeFile(wb, `${firstName}_${lastName}_report.xlsx`);
+        }
+    }
+</script>

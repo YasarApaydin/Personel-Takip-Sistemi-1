@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewData["Title"] = "Admin Giriş Cıkış Verileri";
+
+}
+
+
+@section AdminGirisCikisStyles {
+    <link rel="stylesheet" href="~/css/AdminGirisCikis.css">
+}
+<nav class="navbar">
+    <ul>
+        <li><a href="#attendance-table">Giriş-Çıkış Verileri</a></li>
+        <li><a href="#date-filter">Tarih Filtresi</a></li>
+        <li><a href="#export-report">Raporlama</a></li>
+    </ul>
+</nav>
+
+<div class="attendance-container">
+    <h1>Giriş-Çıkış Verileri</h1>
+
+    <!-- Arama Çubuğu -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Personel Ara...">
+    </div>
+
+    <!-- Giriş-Çıkış Verileri Tablosu -->
+    <section class="attendance-table" id="attendance-table">
+        <h2>Personel Giriş-Çıkış Tablosu</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ad Soyad</th>
+                    <th>Giriş Saati</th>
+                    <th>Çıkış Saati</th>
+                </tr>
+            </thead>
+            <tbody id="attendanceData">
+                <tr>
+                    <td>1</td>
+                    <td>Ahmet Yılmaz</td>
+                    <td>08:00</td>
+                    <td>17:00</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Ayşe Kaya</td>
+                    <td>09:00</td>
+                    <td>18:00</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Tarih Filtresi -->
+    <section class="date-filter" id="date-filter">
+        <h2>Tarih Filtresi</h2>
+        <form id="filterForm">
+            <input type="date" id="startDate" required>
+            <input type="date" id="endDate" required>
+            <button type="submit">Filtrele</button>
+        </form>
+    </section>
+
+    <!-- Raporlama -->
+    <section class="export-report" id="export-report">
+        <h2>Raporlama</h2>
+        <button id="downloadPdfReport">PDF Olarak İndir</button>
+        <button id="downloadExcelReport">Excel Olarak İndir</button>
+    </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+<script src="js/Roboto-Regular.js"></script>
+
+<script>
+    // PDF İndirme İşlevi
+    document.getElementById('downloadPdfReport').addEventListener('click', () => {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+
+        pdf.text("Personel Giriş-Çıkış Verileri", 10, 10);
+        pdf.autoTable({
+            head: [['ID', 'Ad Soyad', 'Giriş Saati', 'Çıkış Saati']],
+            body: Array.from(document.querySelectorAll("#attendanceData tr")).map(row => {
+                return Array.from(row.cells).map(cell => cell.textContent);
+            })
+        });
+
+        pdf.save('GirisCikisVerileri.pdf');
+    });
+
+    // Excel İndirme İşlevi
+    document.getElementById('downloadExcelReport').addEventListener('click', () => {
+        const table = document.querySelector("table");
+        const wb = XLSX.utils.table_to_book(table, { sheet: "GirisCikisVerileri" });
+        XLSX.writeFile(wb, "GirisCikisVerileri.xlsx");
+    });
+</script>
+
+
+<script>
+    // Arama Çubuğu İşlevselliği
+    const searchInput = document.getElementById("searchInput");
+    const attendanceData = document.getElementById("attendanceData");
+
+    searchInput.addEventListener("input", () => {
+        const filter = searchInput.value.toLowerCase();
+        const rows = attendanceData.getElementsByTagName("tr");
+
+        Array.from(rows).forEach((row) => {
+            const name = row.cells[1].textContent.toLowerCase();
+            row.style.display = name.includes(filter) ? "" : "none";
+        });
+    });
+</script>

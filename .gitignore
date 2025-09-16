@@ -1,0 +1,22 @@
+# Visual Studio ile ilgili
+.vs/
+*.user
+*.suo
+
+# Build klasörleri
+bin/
+obj/
+Debug/
+Release/
+
+# Rider / JetBrains IDE
+.idea/
+
+# dotnet kullanıcı dosyaları
+*.csproj.user
+*.dbmdl
+
+# Logs
+*.log
+
+

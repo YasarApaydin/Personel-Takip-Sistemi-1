@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Görüntü İzleme";
+}
+
+@section CameraStyle {
+    <link rel="stylesheet" href="~/css/Camera.css">
+}
+
+<header>
+    <div class="nav-left">
+        <a asp-action="Anasayfa" asp-controller="Home">Anasayfa</a>
+    </div>
+    <div class="nav-right">
+        <span class="username">Merhaba, <strong>@ViewData["UserFullName"]</strong></span>
+        <form asp-action="Logout" asp-controller="Yonetici" method="post" style="display:inline;">
+            <button type="submit" class="btn logout-btn">Çıkış</button>
+        </form>
+
+
+
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li><a asp-controller="Yonetici" asp-action="PersonelBilgi">Giriş-Çıkış Bilgileri</a></li>
+        <li ><a asp-controller="Yonetici" asp-action="Yonetici">Personel Yönetimi</a></li>
+        <li class="active"><a  asp-controller="Yonetici" asp-action="Camera">Kamera</a></li>
+    </ul>
+</nav>
+
+
+<main>
+    <div class="camera-container">
+        <div class="video-wrapper">
+            <img id="videoFeed" style="max-height: 600px;" alt="Bağlantı Bekleniyor..." />
+        </div>
+        <div class="camera-status">
+            <span id="connectionStatus" class="status-badge">Bağlanıyor...</span>
+        </div>
+    </div>
+</main>

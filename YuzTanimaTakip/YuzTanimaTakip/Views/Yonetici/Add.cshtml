@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Görüntü İzleme";
+}
+
+@section AddPersoneStyle {
+    <link rel="stylesheet" href="~/css/AddPersonel.css">
+}
+@model YeniCalisanViewModel
+<form method="post" enctype="multipart/form-data" asp-action="Add" asp-controller="Yonetici" id="profileForm">
+    <input type="hidden" asp-for="Id" value="@Guid.NewGuid()" />
+
+    <div class="container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-image">
+                    <img id="profileImage" src="https://placehold.co/200x200" alt="Profil Fotoğrafı">
+                    <div class="image-upload">
+                        <label for="imageInput" class="upload-button">Fotoğraf Seç</label>
+                        <input asp-for="FotoDosya" type="file" id="imageInput" accept="image/*" />
+                        <span asp-validation-for="FotoDosya" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="profile-main-info">
+                    <input asp-for="Ad" placeholder="Ad" class="m-2 text-input" />
+                    <span asp-validation-for="Ad" class="text-danger mb-2"></span>
+                    <input asp-for="Soyad" placeholder="Soyad" class="m-2 text-input" />
+                    <span asp-validation-for="Soyad" class="text-danger mb-2"></span>
+
+                    <input asp-for="Email" placeholder="Email" class="m-2 text-input" />
+                    <span asp-validation-for="Email" class="text-danger mb-2"></span>
+
+                    <input asp-for="Telefon" placeholder="Telefon" class="m-2 text-input" />
+                    <span asp-validation-for="Telefon" class="text-danger mb-2"></span>
+
+                    <input asp-for="Sifre" placeholder="Şifre" class="text-input m-2" type="password" />
+                    <span asp-validation-for="Sifre" class="text-danger mb-2"></span>
+
+                    <input asp-for="SifreTekrar" placeholder="Şifre Tekrar" class="text-input m-2" type="password" />
+                    <span asp-validation-for="SifreTekrar" class="text-danger mb-2"></span>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:30px;">
+                <button type="submit" class="submit-button">Kaydet</button>
+            </div>
+
+            <div style="text-align:center; margin-top:30px;">
+                <a asp-action="Yonetici" class="submit-button" style="text-decoration: none; background-color: #4CAF50;">Yönetici Paneline Dön</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById('profileForm');
+        const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="password"]');
+
+        document.getElementById('imageInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('profileImage').src = e.target.result;
+                    localStorage.setItem('profileImage', e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        inputs.forEach(input => {
+            input.addEventListener('input', function () {
+                localStorage.setItem(this.id, this.value);
+            });
+
+            const savedValue = localStorage.getItem(input.id);
+            if (savedValue) {
+                input.value = savedValue;
+            }
+        });
+
+        const savedImage = localStorage.getItem('profileImage');
+        if (savedImage) {
+            document.getElementById('profileImage').src = savedImage;
+        }
+
+        form.addEventListener('submit', function () {
+            localStorage.clear();
+        });
+    });
+</script>

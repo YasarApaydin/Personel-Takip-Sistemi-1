@@ -1,0 +1,52 @@
+﻿
+@section AdminStyles {
+    <link rel="stylesheet" href="~/css/Admin.css">
+}
+
+@{
+    ViewData["Title"] = "Admin Paneli";
+
+}
+<nav class="navbar">
+    <ul>
+        <li><a href="#user-management">Kullanıcı Yönetimi</a></li>
+        <li><a href="#attendance">Giriş-Çıkış Verileri</a></li>
+        <li><a href="#leave-requests">İzin Talepleri</a></li>
+        <li><a href="#reports">Performans ve Raporlar</a></li>
+        <li><a href="#settings">Sistem Ayarları</a></li>
+        <li><a href="#notifications">Bildirimler</a></li>
+    </ul>
+</nav>
+
+<!-- Sayfa İçeriği -->
+<div class="content">
+    <section id="user-management">
+        <h2>Kullanıcı Yönetimi</h2>
+        <p>Yeni kullanıcı ekleme, mevcut kullanıcıları düzenleme veya silme işlemlerini buradan gerçekleştirebilirsiniz.</p>
+    </section>
+
+    <section id="attendance">
+        <h2>Giriş-Çıkış Verileri</h2>
+        <p>Tüm personelin giriş ve çıkış saatlerini burada görüntüleyebilirsiniz.</p>
+    </section>
+
+    <section id="leave-requests">
+        <h2>İzin Talepleri</h2>
+        <p>Personelden gelen izin taleplerini buradan onaylayabilir veya reddedebilirsiniz.</p>
+    </section>
+
+    <section id="reports">
+        <h2>Performans ve Raporlar</h2>
+        <p>Personelin performans raporlarını görüntüleyebilir ve istatistiklere ulaşabilirsiniz.</p>
+    </section>
+
+    <section id="settings">
+        <h2>Sistem Ayarları</h2>
+        <p>Sistemle ilgili genel ayarları buradan değiştirebilirsiniz.</p>
+    </section>
+
+    <section id="notifications">
+        <h2>Bildirimler</h2>
+        <p>Sistemdeki önemli bildirimleri ve güncellemeleri burada görebilirsiniz.</p>
+    </section>
+</div>

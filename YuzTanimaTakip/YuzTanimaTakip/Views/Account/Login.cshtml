@@ -1,0 +1,49 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Giris";
+}
+
+@section CustomStyles {
+    <link rel="stylesheet" href="~/css/giris.css">
+}
+
+<div class="page-wrapper">
+    <div class="login-container">
+        <h1>Hoş Geldiniz</h1>
+        <form asp-action="Login" asp-controller="Account" method="post">
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <!-- Email input alanı -->
+            <input asp-for="Email" type="email" placeholder="E-posta" required>
+
+            <div class="password-wrapper">
+                <!-- Password input alanı -->
+                <input asp-for="Sifre" type="password" id="password" placeholder="Şifre" required>
+                <i class="bi bi-eye-slash eye-icon" id="togglePassword"></i>
+            </div>
+
+            <div class="form-group form-check" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" style="margin-right: 10px;margin-bottom: 10px;">
+                    <label class="form-check-label" for="exampleCheck1">Beni Hatırla</label>
+                </div>
+                <a href="#">Şifremi Unuttum?</a>
+            </div>
+
+            <button type="submit">Giriş Yap</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const passwordInput = document.querySelector('#password');
+
+    togglePassword.addEventListener('click', function () {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.classList.toggle('bi-eye');
+        this.classList.toggle('bi-eye-slash');
+    });
+</script>

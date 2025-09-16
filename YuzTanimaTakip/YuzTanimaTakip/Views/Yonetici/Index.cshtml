@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Yonetici";
+}
+
+@section YoneticiStyle {
+    <link rel="stylesheet" href="~/css/Manager.css">
+}
+
+<nav>
+    <div class="nav-left">
+        <a asp-action="Anasayfa" asp-controller="Home">Anasayfa</a>
+    </div>
+    <div class="nav-right">
+        <span class="username">Merhaba, <strong>@ViewData["UserFullName"]</strong></span>
+        <form asp-action="Logout" asp-controller="Yonetici" method="post" style="display:inline;">
+            <button type="submit" class="btn logout-btn">Çıkış</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="dashboard">
+        <div class="dashboard-item">
+            <i class="fa fa-users"></i>
+            <h3>Personel Yönetimi</h3>
+            <p>Mevcut kullanıcıları yönetebilir, yeni kullanıcılar ekleyebilirsiniz.</p>
+            <a asp-action="Yonetici" class="btn">Kullanıcıları Gör</a>
+        </div>
+        <div class="dashboard-item">
+            <i class="fa fa-cogs"></i>
+            <h3>Ayarlamalar</h3>
+            <p>Sistem ayarlarını düzenleyebilir, genel yapılandırmalar yapabilirsiniz.</p>
+            <a href="#" class="btn">Ayarları Düzenle</a>
+        </div>
+        <div class="dashboard-item">
+            <i class="fa fa-bar-chart"></i>
+            <h3>İstatistikler</h3>
+            <p>Veri analizi ve raporlama ekranı.</p>
+            <a href="#" class="btn">İstatistikleri Gör</a>
+        </div>
+        <div class="dashboard-item">
+            <i class="fa fa-lock"></i>
+            <h3>Güvenlik</h3>
+            <p>Şifreler, doğrulama ve güvenlik ayarlarını yönetebilirsiniz.</p>
+            <a href="#" class="btn">Güvenliği Yönet</a>
+        </div>
+    </div>
+</div>
+

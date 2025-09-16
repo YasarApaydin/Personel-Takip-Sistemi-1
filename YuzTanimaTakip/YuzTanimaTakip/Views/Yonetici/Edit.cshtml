@@ -1,0 +1,103 @@
+﻿@model YeniCalisanViewModel
+
+@{
+    ViewData["Title"] = "Personel Düzenle";
+}
+
+<h2 class="mb-4 text-center">Personel Düzenle</h2>
+
+<div class="edit-form-container mx-auto p-4 shadow-sm rounded bg-light">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="Ad" class="form-label"></label>
+            <input asp-for="Ad" class="form-control form-control-lg" placeholder="Adınızı girin" />
+            <span asp-validation-for="Ad" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Soyad" class="form-label"></label>
+            <input asp-for="Soyad" class="form-control form-control-lg" placeholder="Soyadınızı girin" />
+            <span asp-validation-for="Soyad" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" type="email" class="form-control form-control-lg" placeholder="E-posta adresinizi girin" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Telefon" class="form-label"></label>
+            <input asp-for="Telefon" class="form-control form-control-lg" placeholder="Telefon numaranızı girin" />
+            <span asp-validation-for="Telefon" class="text-danger"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="FotoDosya" class="form-label">Fotoğraf Yükle (İsteğe bağlı)</label>
+            <input asp-for="FotoDosya" type="file" class="form-control form-control-lg" />
+            <span asp-validation-for="FotoDosya" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex gap-3 justify-content-center">
+            <button type="submit" class="btn btn-success btn-lg px-4">Güncelle</button>
+            <a asp-action="Yonetici" class="btn btn-outline-secondary btn-lg px-4">Geri Dön</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .edit-form-container {
+        max-width: 600px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    label.form-label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    input.form-control-lg {
+        border-radius: 8px;
+        border: 1.5px solid #ced4da;
+        transition: border-color 0.3s ease;
+    }
+
+        input.form-control-lg:focus {
+            border-color: #198754; /* Bootstrap green */
+            box-shadow: 0 0 8px rgba(25, 135, 84, 0.3);
+        }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+
+    button.btn-success {
+        background-color: #198754;
+        border-color: #198754;
+        transition: background-color 0.3s ease;
+    }
+
+        button.btn-success:hover {
+            background-color: #146c43;
+            border-color: #146c43;
+        }
+
+    a.btn-outline-secondary {
+        border-radius: 8px;
+        color: #6c757d;
+        border-color: #6c757d;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+        a.btn-outline-secondary:hover {
+            background-color: #6c757d;
+            color: #fff;
+            text-decoration: none;
+        }
+</style>
+
+

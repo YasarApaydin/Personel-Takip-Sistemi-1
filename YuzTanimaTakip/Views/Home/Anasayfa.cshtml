@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewData["Title"] = "Anasayfa";
+}
+
+@section AnasayfaStyle {
+    <link rel="stylesheet" href="~/css/Anasayfa.css">
+}
+
+
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">SırıUs</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#hakkinda">Hakkımızda</a></li>
+                <li class="nav-item"><a class="nav-link" href="#hizmetler">Hizmetler</a></li>
+                <li class="nav-item"><a class="nav-link" href="#iletisim">İletişim</a></li>
+
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <!-- Kullanıcı giriş yaptıysa -->
+                    <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="Yonetici">Yönetici</a></li>
+                 
+                    <li class="nav-item"><a class="nav-link me-5" asp-action="Logout" asp-controller="Yonetici">Çıkış Yap</a></li>
+                }
+                else
+                {
+                    <!-- Kullanıcı giriş yapmamışsa -->
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Login" asp-controller="Account">Giriş Yap</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Hero Section -->
+<header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="display-4 fw-bold">Geleceğe Hoş Geldiniz!</h1>
+        <p class="lead">Teknoloji ve yeniliklerle dünyayı keşfedin.</p>
+        <a href="#hakkinda" class="btn btn-custom">Keşfet</a>
+    </div>
+</header>
+
+<!-- Hakkımızda -->
+<section id="hakkinda" class="section text-center">
+    <div class="container">
+        <h2>Hakkımızda</h2>
+        <p class="lead">Yenilikçi çözümlerle geleceği inşa eden bir ekibiz.</p>
+    </div>
+</section>
+
+<!-- Hizmetler -->
+<section id="hizmetler" class="section bg-light text-center">
+    <div class="container">
+        <h2>Hizmetlerimiz</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card p-4 shadow">
+                    <h3>Web Tasarım</h3>
+                    <p>Şık ve modern web siteleri tasarlıyoruz.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-4 shadow">
+                    <h3>Mobil Uygulama</h3>
+                    <p>Mobil dünyada yerinizi alın.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-4 shadow">
+                    <h3>Dijital Pazarlama</h3>
+                    <p>Markanızı büyütmek için buradayız.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- İletişim -->
+<section id="iletisim" class="section text-center">
+    <div class="container">
+        <h2>İletişime Geçin</h2>
+        <p>Bize ulaşmak için aşağıdaki formu doldurun.</p>
+        <form class="w-50 mx-auto">
+            <input type="text" class="form-control my-2" placeholder="Adınız">
+            <input type="email" class="form-control my-2" placeholder="E-posta">
+            <textarea class="form-control my-2" rows="4" placeholder="Mesajınız"></textarea>
+            <button class="btn btn-custom">Gönder</button>
+        </form>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3">
+    <p>© 2025 Tüm Hakları Saklıdır.</p>
+</footer>
+
